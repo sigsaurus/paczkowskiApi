@@ -1,0 +1,215 @@
+.control-bar {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    background-color: #5f5f5f;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+    height: 40px;
+    margin: auto;
+}
+
+.content {
+    position: relative;
+}
+
+.site-content {
+    margin-top: 20px;
+    padding: 40px;
+    text-align: center;
+}
+
+.control-bar-element {
+    padding: 9px 20px;
+    cursor: pointer;
+    right: 0px;
+    float: right;
+}
+
+.control-bar-element:nth-child(-n + 2) {
+    float: left;
+}
+
+.control-bar-element.active {
+    background-color: #7e7d7d;
+}
+
+.control-bar-element:hover {
+    background-color: #7e7d7d;
+}
+
+.form-data {
+    width: 20%;
+    min-width: 400px;
+    margin: auto;
+}
+
+.form-data .form-row {
+    margin: 15px auto;
+    text-align: left;
+}
+
+.form-data label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-data .form-row.file {
+    text-align: center;
+    position: relative;
+    height: 144px;
+}
+
+.form-data .form-row.file input {
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+    padding: 60px 0px;
+    border: none;
+}
+
+.form-data .form-row.file label {
+    position: absolute;
+    width: 100%;
+    padding: 60px 0px;
+    cursor: pointer;
+}
+
+.form-data .form-row.file:hover {
+    color: red !important;
+    background-color: #dbdbdb98;
+}
+
+.hidden {
+    display: none;
+}
+
+.img-preview img {
+    width: 100%;
+    max-height: 440px;
+}
+
+.img-preview button{
+    margin: 10px auto;
+}
+
+.photo-display {
+    text-align: center;
+    width: 50%;
+    max-width: 850px;
+    margin: auto;
+}
+
+.single-photo {
+    margin: 10px;
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    text-align: center;
+}
+
+.single-photo img {
+    display: inline-block;
+    margin: 5px auto;    
+}
+
+.categories-container {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.category {
+    width: 120px;
+    height: 80px;
+    margin: 10px 20px 30px;
+    display: inline-block;
+    text-align: center;
+}
+
+.category span {
+    display: inline-block;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.category img {
+    cursor: pointer;
+}
+
+.single-photo button, .category button {
+    padding: 0px 5px;
+}
+
+.photos-container {
+    margin: 20px auto;
+    text-align: left;
+    width: 850px;
+}
+
+h2, h3, h4 {
+    text-align: center;
+}
+
+img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.w3-modal {
+    padding-top: 100px;
+}
+
+.w3-modal div.w3-container {
+    margin-top: 10px;
+}
+
+.w3-modal div.w3-container label {
+    font-weight: bold;
+}
+
+.w3-modal footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.w3-modal-content {
+    width: 400px;
+}
+
+.w3-modal .img-preview {
+    height: 200px;
+    margin-top: 10px;
+}
+
+.data-error {
+    border: 1px solid red !important;
+}
+
+.image-name {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+}
+
+.shared-photo {
+    width: 180px;
+    height: 130px;
+}
+
+.home-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 10px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.share-header {
+    position: relative;
+}

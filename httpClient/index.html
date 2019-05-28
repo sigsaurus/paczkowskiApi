@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="lib/jqeury.visible.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <title>Organize Your Photos</title>
+</head>
+
+<body>
+    <div id="vueApp">
+        <div class="index-header">
+            <h1>{{ indexHeader }}</h1>
+        </div>
+        <div class="content">
+            <div class="w3-bar control-bar">
+                <div v-for="bar in controlBar" 
+                    :key="bar.name"
+                    v-if="bar.display"
+                    :class="['control-bar-element', { active: currentBar.name === bar.name }]"
+                    @click="barClick(bar)">
+                    {{ bar.name }}
+                </div>
+            </div>
+            
+            <div class="w3-container site-content">
+                <component
+                    v-bind:is="currentBar.component"
+                    v-bind:event-data="currentBar.eventData"
+                    @component-change="changeComponent"
+                ></component>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+
+        import { ControlBar, RoutesComponents } from './src/index.js';
+        import Commons from './src/commons.js';
+        import VueImg from './lib/v-img.js';
+
+        Vue.use(VueImg);
+
+        var vueData = {
+            indexHeader: 'Paczkowski Photos',
+            controlBar: ControlBar,
+            currentBar: ControlBar.photos
+        };
+
+        var vueMethods = {
+            changeComponent(data) {
+                this.controlBar.photos.display = data.isLoggedIn;
+                this.controlBar.addPhoto.display = data.isLoggedIn;
+                this.controlBar.login.display = !data.isLoggedIn;
+                this.controlBar.register.display = !data.isLoggedIn;
+                let bar = RoutesComponents[data.component];
+                bar.eventData = data.eventData;
+                this.currentBar = bar;
+            },
+
+            barClick(bar) {
+                this.currentBar = bar;
+                if (bar.name === "LOGOUT") {
+                    Commons.logout();
+                    location.reload();
+                }
+            }
+        }
+
+        var vueApp = new Vue({
+            el: "#vueApp",
+            data: vueData,
+            methods: vueMethods
+        });
+
+        window.VueApp = vueApp;
+
+        $(window).scroll(function () {
+            let isvisible = $('.index-header').visible(true);
+            if (!isvisible) {
+                $('.control-bar').css('position', 'fixed');
+            } else {
+                $('.control-bar').css('position', 'absolute');
+            }
+        });
+    </script>
+</body>
+
+</html>
