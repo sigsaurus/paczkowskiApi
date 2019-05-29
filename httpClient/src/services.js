@@ -1,4 +1,4 @@
-let baseUrl = 'http://localhost:58271/api';
+let baseUrl = 'http://localhost:58270/api';
 
 export default {
     register: {

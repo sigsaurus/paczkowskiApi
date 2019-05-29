@@ -34,13 +34,5 @@ namespace paczkowskiApi.Controllers
             var result = _repository.AddUser(user);
             return result;
         }
-
-        [HttpGet]
-        [Authorize(AuthenticationSchemes = AuthScheme.Cookies)]
-        public ActionResult<IEnumerable<User>> GetAllUsers()
-        {
-            var result = _repository.GetAllUsers();
-            return new JsonResult(result);
-        }
     }
 }

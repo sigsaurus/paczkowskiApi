@@ -18,6 +18,7 @@ namespace DbContract.Repository
 
         public string AddPhoto(Photo photo)
         {
+            Sanitize(photo);
             var user = dbContext.Users.Include(p => p.Photos).Single(u => u.Id == photo.User.Id);
             user.Photos.Add(photo);
             dbContext.SaveChanges();
@@ -29,6 +30,7 @@ namespace DbContract.Repository
         {
             try
             {
+                Sanitize(user);
                 var existingUser = dbContext.Users.Where(x => x.Email == user.Email).FirstOrDefault();
 
                 if (existingUser != null)
@@ -114,6 +116,7 @@ namespace DbContract.Repository
 
         public void EditPhoto(Photo photo)
         {
+            Sanitize(photo);
             var dbPhoto = dbContext.Photos.Single(p => p.PhotoNum == photo.PhotoNum && p.User.Id == photo.User.Id);
             dbPhoto.Category = photo.Category;
             dbPhoto.DisplayName = photo.DisplayName;
@@ -144,6 +147,7 @@ namespace DbContract.Repository
 
         public void EditCategory(User user, string oldCategory, string newCategory)
         {
+            newCategory = newCategory?.Clean();
             bool alreadyExists = dbContext.Photos.Where(p => p.Category == newCategory && p.User.Id == user.Id).Select(p => p.Category).Any();
             if (alreadyExists)
                 throw new Exception($"Category [{newCategory}] already exists");
@@ -172,6 +176,19 @@ namespace DbContract.Repository
                 return photos;
 
             throw new Exception("Category not found");
+        }
+        
+        private void Sanitize(Photo photo)
+        {
+            photo.Category = photo.Category?.Clean();
+            photo.DisplayName = photo.DisplayName?.Clean();
+            photo.FileName = photo.FileName?.Clean();
+        }
+
+        private void Sanitize(User user)
+        {
+            user.Email = user.Email?.Clean();
+            user.Name = user.Name?.Clean();
         }
     }
 }
