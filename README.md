@@ -2,6 +2,6 @@
 Paczkowski Photos
 * Image Uploading
 * Image Sharing
-* Grouping in categoris
+* Grouping in categories
 * Categories sharing
 * Account Creation
